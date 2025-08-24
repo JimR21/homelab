@@ -1,6 +1,8 @@
 version: '3.3'
 services:
   prowlarr:
+    env_file:
+    - ../stack.env
     image: 'lscr.io/linuxserver/prowlarr:latest'
     container_name: prowlarr
     environment:
