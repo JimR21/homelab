@@ -1,14 +1,16 @@
 version: '3.3'
 services:
+  env_file:
+    - ../stack.env
   prowlarr:
     image: 'lscr.io/linuxserver/prowlarr:latest'
     container_name: prowlarr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Zurich
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     volumes:
-      - '/mnt/HDD_8TB/server/configs/prowlarr:/config'
+      - '${APPDATA}/prowlarr:/config'
     ports:
       - '9696:9696'
     restart: unless-stopped
