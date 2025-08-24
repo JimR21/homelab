@@ -9,12 +9,12 @@ services:
       - ../stack.env
     environment:
       HOMEPAGE_ALLOWED_HOSTS: gethomepage.dev # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
-      PUID: $PUID
-      PGID: $PGID
-      TZ: $TZ
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Zurich
     ports:
       - "3010:3000"
     volumes:
-      - '${APPDATA}/homepage:/app/config'
+      - /srv/dim-server/appdata/homepage:/app/config
       # Optional: allow Homepage to read running containers for widgets
       - /var/run/docker.sock:/var/run/docker.sock:ro

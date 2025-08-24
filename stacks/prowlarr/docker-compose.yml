@@ -6,11 +6,11 @@ services:
     image: 'lscr.io/linuxserver/prowlarr:latest'
     container_name: prowlarr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
     volumes:
-      - '${APPDATA}/prowlarr:/config'
+      - /srv/dim-server/appdata/prowlarr:/config
     ports:
       - '9696:9696'
     restart: unless-stopped
