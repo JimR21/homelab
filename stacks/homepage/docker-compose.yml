@@ -8,10 +8,10 @@ services:
     env_file:
       - ../stack.env
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: gethomepage.dev # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
-      PUID: ${PUID}
-      PGID: ${PGID}
-      TZ: ${TZ}
+    - HOMEPAGE_ALLOWED_HOSTS=gethomepage.dev # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+    - PUID=${PUID}
+    - PGID=${PGID}
+    - TZ=${TZ}
     ports:
       - "3010:3000"
     volumes:
