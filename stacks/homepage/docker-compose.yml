@@ -1,0 +1,19 @@
+version: "3.3"
+
+services:
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    env_file:
+      - ../stack.env
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${APPDATA}/homepage:/app/config
+      # Optional: allow Homepage to read running containers for widgets
+      - /var/run/docker.sock:/var/run/docker.sock:ro
