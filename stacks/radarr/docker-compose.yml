@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  radarr:
+    image: 'lscr.io/linuxserver/radarr:latest'
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - '/mnt/HDD_8TB/server/configs/radarr:/config'
+      - '/mnt/HDD_8TB/server/data/media/movies:/movies'
+      - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
+    ports:
+      - '7878:7878'
+    restart: unless-stopped
+
+  swaparr-radarr:
+    image: ghcr.io/thijmengthn/swaparr:latest
+    container_name: swaparr-radarr
+    restart: unless-stopped
+    environment:
+      - BASEURL=http://radarr:7878  # Use the Radarr service name
+      - APIKEY=b19077d7018e46b192d5a89daf88366e
+      - PLATFORM=radarr
+      - MAX_STRIKES=3
+      - SCAN_INTERVAL=10m
+      - MAX_DOWNLOAD_TIME=2h
+      - IGNORE_ABOVE_SIZE=25GB
+      - REMOVE_FROM_CLIENT=true
+      - DRY_RUN=false
+    depends_on:
+      - radarr

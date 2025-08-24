@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  sonarr:
+    container_name: sonarr
+    image: 'lscr.io/linuxserver/sonarr:latest'
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    ports:
+      - '8989:8989'
+    volumes:
+      - '/mnt/HDD_8TB/server/configs/sonarr:/config'
+      - '/mnt/HDD_8TB/server/data/media/shows:/tv'
+      - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
+    restart: unless-stopped
+
+  swaparr-sonarr:
+    image: ghcr.io/thijmengthn/swaparr:latest
+    container_name: swaparr-sonarr
+    restart: unless-stopped
+    environment:
+      - BASEURL=http://sonarr:8989  # Use the Sonarr service name
+      - APIKEY=41cdb87a6ff94bf5ba25bb27ba500284
+      - PLATFORM=sonarr
+      - MAX_STRIKES=3
+      - SCAN_INTERVAL=10m
+      - MAX_DOWNLOAD_TIME=2h
+      - IGNORE_ABOVE_SIZE=25GB
+      - REMOVE_FROM_CLIENT=true
+      - DRY_RUN=false
+    depends_on:
+      - sonarr

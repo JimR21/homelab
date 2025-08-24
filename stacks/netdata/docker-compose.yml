@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  netdata:
+    image: netdata/netdata:stable
+    container_name: netdata
+    ports:
+      - "19999:19999"
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      - DO_NOT_TRACK=1
+      - NETDATA_DISABLE_PLUGINS=cgroups,apps,check,mongodb
+      - NETDATA_DB_ENGINE=ram
+      - NETDATA_MEMORY_MODE=save
+      - NETDATA_HISTORY=7200
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro

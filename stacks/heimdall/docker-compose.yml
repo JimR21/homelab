@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  heimdall:
+    image: 'lscr.io/linuxserver/heimdall:latest'
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - '/mnt/HDD_8TB/server/configs/heimdall:/config'
+    ports:
+      - '8888:80'
+      - '8883:443'
+    restart: unless-stopped
