@@ -5,8 +5,6 @@ services:
     image: bropat/eufy-security-ws:latest
     container_name: eufy-security-ws
     network_mode: host
-    env_file:
-      - .env
     volumes:
       - /srv/dim-server/appdata/eufy-ws:/data
     restart: unless-stopped
