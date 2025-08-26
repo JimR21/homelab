@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  scrutiny:
+    image: ghcr.io/analogj/scrutiny:master-omnibus
+    container_name: scrutiny
+    ports:
+      - "8091:8080"
+    restart: unless-stopped
+    cap_add:
+      - SYS_RAWIO
+      - SYS_ADMIN
+    devices:
+      - /dev/sda:/dev/sda
+      - /dev/sdb:/dev/sdb
+      - /dev/sdc:/dev/sdc
+    environment:
+      - SCRUTINY_WEB_LISTEN_PORT=8080
+      - SCRUTINY_WEB_LISTEN_HOST=0.0.0.0
+      - SCRUTINY_COLLECTOR_RUN_STARTUP=true
+    volumes:
+      - /srv/dim-server/scrutiny/config:/opt/scrutiny/config
+      - /srv/dim-server/scrutiny/influxdb:/opt/scrutiny/influxdb
+      - /run/udev:/run/udev:ro
