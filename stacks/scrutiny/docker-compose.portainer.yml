@@ -19,6 +19,6 @@ services:
       - SCRUTINY_WEB_LISTEN_HOST=0.0.0.0
       - SCRUTINY_COLLECTOR_RUN_STARTUP=true
     volumes:
-      - /srv/dim-server/scrutiny/config:/opt/scrutiny/config
-      - /srv/dim-server/scrutiny/influxdb:/opt/scrutiny/influxdb
+      - /srv/dim-server/appdata/scrutiny/config:/opt/scrutiny/config
+      - /srv/dim-server/appdata/scrutiny/influxdb:/opt/scrutiny/influxdb
       - /run/udev:/run/udev:ro
