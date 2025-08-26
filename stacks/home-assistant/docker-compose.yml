@@ -1,0 +1,15 @@
+version: "3"
+services:
+  homeassistant:
+    image: linuxserver/homeassistant:latest
+    container_name: homeassistant
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Zurich
+      - PUID=1000 # User ID to run as
+      - PGID=1000 # Group ID to run as
+    volumes:
+      - /srv/dim-server/appdata/home-assistant:/config # Contains all relevant configuration files.
+    devices:
+      - /dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_bcd1b661ea73ef11ba35e81e313510fd-if00-port0:/dev/ttyUSB0 # For passing through USB, serial or gpio devices.
