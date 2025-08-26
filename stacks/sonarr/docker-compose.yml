@@ -10,7 +10,7 @@ services:
     ports:
       - '8989:8989'
     volumes:
-      - '/mnt/HDD_8TB/server/configs/sonarr:/config'
+      - '/srv/dim-server/appdata/sonarr:/config'
       - '/mnt/HDD_8TB/server/data/media/shows:/tv'
       - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
     restart: unless-stopped

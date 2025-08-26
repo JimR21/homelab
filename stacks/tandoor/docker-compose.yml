@@ -4,7 +4,7 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     volumes:
-      - /mnt/HDD_8TB/server/configs/tandoor_db:/var/lib/postgresql/data
+      - /srv/dim-server/appdata/tandoor_db:/var/lib/postgresql/data
     env_file:
       - ./.env
       

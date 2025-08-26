@@ -9,7 +9,7 @@ services:
       - TZ=Europe/Zurich
       - JELLYFIN_PublishedServerUrl=192.168.0.5
     volumes:
-      - '/mnt/HDD_8TB/server/configs/jellyfin:/config'
+      - '/srv/dim-server/appdata/jellyfin:/config'
       - '/mnt/HDD_8TB/server/data/media/shows:/data/tvshows'
       - '/mnt/HDD_8TB/server/data/media/movies:/data/movies'
     ports:

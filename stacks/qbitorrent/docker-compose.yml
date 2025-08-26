@@ -9,7 +9,7 @@ services:
       - TZ=Europe/Zurich
       - WEBUI_PORT=8090
     volumes:
-      - '/mnt/HDD_8TB/server/configs/qbitorrent:/config'
+      - '/srv/dim-server/appdata/qbitorrent:/config'
       - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
     ports:
       - '8090:8090'

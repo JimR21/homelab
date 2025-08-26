@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Europe/Zurich
     volumes:
-      - '/mnt/HDD_8TB/server/configs/readarr:/config'
+      - '/srv/dim-server/appdata/readarr:/config'
       - '/mnt/HDD_8TB/server/data/media/books:/books'
       - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
     ports:

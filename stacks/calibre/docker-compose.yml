@@ -11,7 +11,7 @@ services:
       #- PASSWORD= #optional
       #- CLI_ARGS= #optional
     volumes:
-      - /mnt/HDD_8TB/server/configs/calibre:/config
+      - /srv/dim-server/appdata/calibre:/config
       - /mnt/HDD_8TB/server/data/media/books:/books
       - /mnt/HDD_8TB/server/data/media/book_imports:/imports
       - /mnt/HDD_8TB/server/data/media/books_kepubified:/kepubified
@@ -30,7 +30,7 @@ services:
       - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
-      - /mnt/HDD_8TB/server/configs/calibre-web:/config
+      - /srv/dim-server/appdata/calibre-web:/config
       - /mnt/HDD_8TB/server/data/media/books:/books  # SAME library as Calibre
     ports:
       - 8083:8083

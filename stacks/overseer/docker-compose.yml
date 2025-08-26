@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Europe/Zurich
     volumes:
-      - /mnt/HDD_8TB/server/configs/overseerr:/config
+      - /srv/dim-server/appdata/overseerr:/config
     ports:
       - 5055:5055
     restart: unless-stopped

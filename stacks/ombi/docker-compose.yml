@@ -9,7 +9,7 @@ services:
       - TZ=Etc/UTC
       - BASE_URL=/ombi
     volumes:
-      - '/mnt/HDD_8TB/server/configs/ombi:/config'
+      - '/srv/dim-server/appdata/ombi:/config'
     ports:
       - '3579:3579'
     restart: unless-stopped

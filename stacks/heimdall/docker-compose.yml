@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Europe/Zurich
     volumes:
-      - '/mnt/HDD_8TB/server/configs/heimdall:/config'
+      - '/srv/dim-server/appdata/heimdall:/config'
     ports:
       - '8888:80'
       - '8883:443'
