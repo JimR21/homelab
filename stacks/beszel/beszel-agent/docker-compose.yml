@@ -1,0 +1,15 @@
+services:
+  beszel-agent:
+    image: henrygd/beszel-agent
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /srv/dim-server/appdata/beszel-agent:/var/lib/beszel-agent
+      # monitor other disks / partitions by mounting a folder in /extra-filesystems
+      # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
+      # Monitor SSD disk (sdc2)
+      - /mnt/sdc2:/extra-filesystems/sdc2:ro
+    environment:
+      LISTEN: 45876
