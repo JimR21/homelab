@@ -21,6 +21,7 @@ services:
     restart: unless-stopped
     environment:
       - BASEURL=http://radarr:7878  # Use the Radarr service name
+      - APIKEY=${APIKEY}
       - PLATFORM=radarr
       - MAX_STRIKES=3
       - SCAN_INTERVAL=10m

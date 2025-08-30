@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     environment:
       - BASEURL=http://sonarr:8989  # Use the Sonarr service name
-      - APIKEY=41cdb87a6ff94bf5ba25bb27ba500284
+      - APIKEY=${APIKEY}
       - PLATFORM=sonarr
       - MAX_STRIKES=3
       - SCAN_INTERVAL=10m
