@@ -10,7 +10,7 @@ services:
     volumes:
       - '/srv/dim-server/appdata/readarr:/config'
       - '/mnt/HDD_8TB/server/data/media/books:/books'
-      - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
+      - '/mnt/HDD_8TB/server/data/torrents/complete:/downloads'
     ports:
       - '8787:8787'
     restart: unless-stopped

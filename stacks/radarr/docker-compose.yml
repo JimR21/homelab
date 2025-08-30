@@ -10,7 +10,7 @@ services:
     volumes:
       - '/srv/dim-server/appdata/radarr:/config'
       - '/mnt/HDD_8TB/server/data/media/movies:/movies'
-      - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
+      - '/mnt/HDD_8TB/server/data/torrents/complete:/downloads'
     ports:
       - '7878:7878'
     restart: unless-stopped
@@ -21,7 +21,6 @@ services:
     restart: unless-stopped
     environment:
       - BASEURL=http://radarr:7878  # Use the Radarr service name
-      - APIKEY=b19077d7018e46b192d5a89daf88366e
       - PLATFORM=radarr
       - MAX_STRIKES=3
       - SCAN_INTERVAL=10m
