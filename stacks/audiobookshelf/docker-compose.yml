@@ -8,7 +8,7 @@ services:
     ports:
       - "13378:80"
     volumes:
-      - /srv/dim-server/appdata/audiobookshelf:/config
+      - /srv/dim-server/appdata/audiobookshelf/config:/config
       - /srv/dim-server/appdata/audiobookshelf/metadata:/metadata
       - /mnt/HDD_8TB/server/data/media/audiobooks:/audiobooks
       - /mnt/HDD_8TB/server/data/media/podcasts:/podcasts
