@@ -10,7 +10,8 @@ services:
       - WEBUI_PORT=8090
     volumes:
       - '/srv/dim-server/appdata/qbitorrent:/config'
-      - '/mnt/HDD_8TB/server/data/torrents/downloads:/downloads'
+      - '/srv/dim-server/downloads/incomplete:/downloads'
+      - '/mnt/HDD_8TB/server/data/torrents/complete:/complete'
     ports:
       - '8090:8090'
       - '6881:6881'
