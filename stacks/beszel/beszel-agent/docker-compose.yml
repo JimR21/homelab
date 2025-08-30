@@ -10,7 +10,7 @@ services:
       # monitor other disks / partitions by mounting a folder in /extra-filesystems
       # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
       # Monitor SSD disk (sdc2)
-      - /mnt/sdc2/.beszel:/extra-filesystems/sdc2:ro
+      - /mnt/HDD_8TB/.beszel:/extra-filesystems/HDD_8TB:ro
     environment:
       LISTEN: 45876
       KEY: ${KEY}
