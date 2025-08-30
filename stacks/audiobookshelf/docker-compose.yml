@@ -8,8 +8,8 @@ services:
     ports:
       - "13378:80"
     volumes:
-      - /mnt/HDD_8TB/server/docker/audiobookshelf/config:/config
-      - /mnt/HDD_8TB/server/docker/audiobookshelf/metadata:/metadata
+      - /srv/dim-server/appdata/audiobookshelf:/config
+      - /srv/dim-server/appdata/audiobookshelf/metadata:/metadata
       - /mnt/HDD_8TB/server/data/media/audiobooks:/audiobooks
       - /mnt/HDD_8TB/server/data/media/podcasts:/podcasts
     environment:

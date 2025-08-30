@@ -1,3 +1,4 @@
 ai/
 stacks/home-assistant/eufy-ws/.env
 stacks/tandoor/.env
+stacks/beszel/beszel-agent/.env
