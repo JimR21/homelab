@@ -16,7 +16,7 @@ services:
       - /mnt/HDD_8TB/server/data/media/book_imports:/imports
       - /mnt/HDD_8TB/server/data/media/books_kepubified:/kepubified
     ports:
-      - 8020:8080  # optional: calibre content-server web port
+      - 8030:8080  # optional: calibre content-server web port
       - 5900:5900  # VNC port to access GUI
     restart: unless-stopped
 
