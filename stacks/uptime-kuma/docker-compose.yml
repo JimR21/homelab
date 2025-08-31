@@ -5,6 +5,16 @@ services:
     container_name: uptime-kuma
     volumes:
       - /srv/dim-server/appdata/uptime-kuma:/app/data
-    ports:
-      - "3001:3001"
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.uptime-kuma.rule=Host(`uptime-kuma.homelab.local`)"
+      - "traefik.http.routers.uptime-kuma.entrypoints=websecure"
+      - "traefik.http.routers.uptime-kuma.tls=true"
+      - "traefik.http.services.uptime-kuma.loadbalancer.server.port=3001"
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true
