@@ -14,10 +14,10 @@ services:
       - "traefik.http.routers.portainer.tls=true"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
     networks:
-      - traefik-net
+      - traefik-private
 
 networks:
-  traefik-net:
+  traefik-private:
     external: true
 
 volumes:

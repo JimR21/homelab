@@ -2,3 +2,5 @@ ai/
 stacks/home-assistant/eufy-ws/.env
 stacks/tandoor/.env
 stacks/beszel/beszel-agent/.env
+stacks/radarr/.env
+stacks/sonarr/.env
