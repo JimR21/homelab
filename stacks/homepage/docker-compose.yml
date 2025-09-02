@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    env_file:
+      - ../stack.env
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: homepage.wouldyoukindly.enter # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Zurich
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`homepage.wouldyoukindly.enter`)"
+      - "traefik.http.routers.homepage.entrypoints=web"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+    volumes:
+      - /srv/dim-server/appdata/homepage:/app/config
+      # Optional: allow Homepage to read running containers for widgets
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  traefik-private:
+    external: true
