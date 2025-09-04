@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   calibre:
-    image: linuxserver/calibre:latest
+    image: linuxserver/calibre:8.6.0
     container_name: calibre
     environment:
       - PUID=1000   # your user ID
@@ -16,22 +16,16 @@ services:
       - /mnt/HDD_8TB/server/data/media/book_imports:/imports
       - /mnt/HDD_8TB/server/data/media/books_kepubified:/kepubified
     ports:
-      - 8030:8080  # optional: calibre content-server web port
       - 5900:5900  # VNC port to access GUI
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre.rule=Host(`calibre.wouldyoukindly.enter`)"
+      - "traefik.http.routers.calibre.entrypoints=web"
+      - "traefik.http.services.calibre.loadbalancer.server.port=8080"
     restart: unless-stopped
 
-  calibre-web:
-    image: linuxserver/calibre-web:latest
-    container_name: calibre-web
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Zurich
-      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
-      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
-    volumes:
-      - /srv/dim-server/appdata/calibre-web:/config
-      - /mnt/HDD_8TB/server/data/media/books:/books  # SAME library as Calibre
-    ports:
-      - 8083:8083
-    restart: unless-stopped
+networks:
+  traefik-private:
+    external: true

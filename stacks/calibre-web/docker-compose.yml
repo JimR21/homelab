@@ -1,0 +1,25 @@
+services:
+  calibre-web:
+    image: linuxserver/calibre-web:latest
+    container_name: calibre-web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - /srv/dim-server/appdata/calibre-web:/config
+      - /mnt/HDD_8TB/server/data/media/books:/books  # SAME library as Calibre
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.wouldyoukindly.enter`)"
+      - "traefik.http.routers.calibre-web.entrypoints=web"
+      - "traefik.http.services.calibre-web.loadbalancer.server.port=8083"
+    restart: unless-stopped
+
+networks:
+  traefik-private:
+    external: true
