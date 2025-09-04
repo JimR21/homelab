@@ -7,8 +7,13 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Zurich
-    ports:
-      - '8989:8989'
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.wouldyoukindly.enter`)"
+      - "traefik.http.routers.sonarr.entrypoints=web"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
     volumes:
       - '/srv/dim-server/appdata/sonarr:/config'
       - '/mnt/HDD_8TB/server/data/media/shows:/tv'
@@ -29,5 +34,11 @@ services:
       - IGNORE_ABOVE_SIZE=25GB
       - REMOVE_FROM_CLIENT=true
       - DRY_RUN=false
+    networks:
+      - traefik-private
     depends_on:
       - sonarr
+
+networks:
+  traefik-private:
+    external: true

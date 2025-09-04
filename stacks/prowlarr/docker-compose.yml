@@ -1,0 +1,22 @@
+services:
+  prowlarr:
+    image: 'lscr.io/linuxserver/prowlarr:latest'
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - /srv/dim-server/appdata/prowlarr:/config
+    restart: unless-stopped
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.wouldyoukindly.enter`)"
+      - "traefik.http.routers.prowlarr.entrypoints=web"
+      - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
+
+networks:
+  traefik-private:
+    external: true

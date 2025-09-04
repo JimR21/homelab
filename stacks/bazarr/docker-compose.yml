@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  bazarr:
+    image: 'lscr.io/linuxserver/bazarr:latest'
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - '/srv/dim-server/appdata/bazarr:/config'
+      - '/mnt/HDD_8TB/server/data/media/shows:/tv'
+      - '/mnt/HDD_8TB/server/data/media/movies:/movies'
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bazarr.rule=Host(`bazarr.wouldyoukindly.enter`)"
+      - "traefik.http.routers.bazarr.entrypoints=web"
+      - "traefik.http.services.bazarr.loadbalancer.server.port=6767"
+    restart: unless-stopped
+
+networks:
+  traefik-private:
+    external: true

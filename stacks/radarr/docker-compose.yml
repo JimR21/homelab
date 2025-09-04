@@ -11,8 +11,13 @@ services:
       - '/srv/dim-server/appdata/radarr:/config'
       - '/mnt/HDD_8TB/server/data/media/movies:/movies'
       - '/mnt/HDD_8TB/server/data/torrents/complete:/downloads'
-    ports:
-      - '7878:7878'
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.wouldyoukindly.enter`)"
+      - "traefik.http.routers.radarr.entrypoints=web"
+      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
     restart: unless-stopped
 
   swaparr-radarr:
@@ -29,5 +34,11 @@ services:
       - IGNORE_ABOVE_SIZE=25GB
       - REMOVE_FROM_CLIENT=true
       - DRY_RUN=false
+    networks:
+      - traefik-private
     depends_on:
       - radarr
+
+networks:
+  traefik-private:
+    external: true

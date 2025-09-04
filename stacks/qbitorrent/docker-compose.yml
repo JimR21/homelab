@@ -13,12 +13,22 @@ services:
       - '/srv/dim-server/downloads/incomplete:/incomplete'
       - '/mnt/HDD_8TB/server/data/torrents/complete:/downloads'
     ports:
-      - '8090:8090'
       - '6881:6881'
       - '6881:6881/udp'
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.wouldyoukindly.enter`)"
+      - "traefik.http.routers.qbittorrent.entrypoints=web"
+      - "traefik.http.services.qbittorrent.loadbalancer.server.port=8090"
     restart: unless-stopped
   restarter:
     image: docker:cli
     volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
     command: ["/bin/sh", "-c", "while true; do sleep 86400; docker restart qbittorrent; done"]
     restart: unless-stopped
+
+networks:
+  traefik-private:
+    external: true

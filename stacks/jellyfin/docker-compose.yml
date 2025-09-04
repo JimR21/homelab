@@ -13,8 +13,18 @@ services:
       - '/mnt/HDD_8TB/server/data/media/shows:/data/tvshows'
       - '/mnt/HDD_8TB/server/data/media/movies:/data/movies'
     ports:
-      - '8096:8096'
       - '8920:8920'
       - '7359:7359/udp'
       - '1900:1900/udp'
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.wouldyoukindly.enter`)"
+      - "traefik.http.routers.jellyfin.entrypoints=web"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
     restart: unless-stopped
+
+networks:
+  traefik-private:
+    external: true
