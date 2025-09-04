@@ -1,11 +1,18 @@
-version: '3.3'
-
 services:
   beszel:
     image: henrygd/beszel:latest
     container_name: beszel
-    ports:
-      - "8020:8090"
     restart: unless-stopped
     volumes:
       - /srv/dim-server/appdata/beszel:/beszel_data
+    networks:
+      - traefik-private
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.beszel.rule=Host(`beszel.wouldyoukindly.enter`)"
+      - "traefik.http.routers.beszel.entrypoints=web"
+      - "traefik.http.services.beszel.loadbalancer.server.port=8090"
+
+networks:
+  traefik-private:
+    external: true
